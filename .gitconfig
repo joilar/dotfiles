@@ -1,0 +1,10 @@
+[user]
+	name = John Oilar
+	email = johnoilar@gmail.com
+[core]
+	editor = vim
+[alias]
+	unstage = reset HEAD --
+	last = log -1 HEAD
+[push]
+	default = simple

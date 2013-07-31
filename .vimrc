@@ -2,6 +2,7 @@
 set nocompatible
 set showcmd
 set incsearch
+set hlsearch
 
 set autoindent
 set smartindent

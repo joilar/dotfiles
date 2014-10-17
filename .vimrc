@@ -1,5 +1,6 @@
 
 set nocompatible
+set modeline
 set showcmd
 set incsearch
 set hlsearch

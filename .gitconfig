@@ -3,6 +3,7 @@
 	email = johnoilar@gmail.com
 [core]
 	editor = vim
+	excludesfile = ~/.gitignore
 [alias]
 	unstage = reset HEAD --
 	last = log -1 HEAD

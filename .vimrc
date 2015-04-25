@@ -10,6 +10,7 @@ set autoindent
 set smartindent
 
 filetype plugin indent on
+syntax on
 
 autocmd FileType text setlocal textwidth=78
 

@@ -15,120 +15,120 @@ my $HOME = realpath($ENV{'HOME'});
 
 sub command
 {
-	my ($command, $message) = @_;
-	say $message . ' [' . $command . ']';
-	`$command`;
+    my ($command, $message) = @_;
+    say $message . ' [' . $command . ']';
+    `$command`;
 }
 
 sub update_bash_config
 {
-	my ($file) = @_;
+    my ($file) = @_;
 
-	# Open the file
-	# Look for the source line
-	# If it is not present, append it
-	
-	my $found = 0;
+    # Open the file
+    # Look for the source line
+    # If it is not present, append it
 
-	if (open my $fh, '<', $HOME . '/' . $file)
-	{
-		while (my $line = <$fh>)
-		{
-			if ($line =~ m{(?:source|\.)\s+~/\.files/$file})
-			{
-				$found = 1;
-				last;
-			}
-		}
+    my $found = 0;
 
-		close $fh;
-	}
-        else
+    if (open my $fh, '<', $HOME . '/' . $file)
+    {
+        while (my $line = <$fh>)
         {
-            say 'Failed to open ' . $file . ': ' . $!;
-            return;
+            if ($line =~ m{(?:source|\.)\s+~/\.files/$file})
+            {
+                $found = 1;
+                last;
+            }
         }
 
-	return if $found;
+        close $fh;
+    }
+    else
+    {
+        say 'Failed to open ' . $file . ': ' . $!;
+        return;
+    }
 
-	say 'Updating bash config [' . $file . ']';
+    return if $found;
 
-	if (open my $fh, '>>', $HOME . '/' . $file)
-	{
-		say {$fh} '# User specific aliases and functions';
-		say {$fh} 'if [ -f ~/.files/' . $file . ' ]; then';
-		say {$fh} '	. ~/.files/' . $file;
-		say {$fh} 'fi';
-		close $fh;
-	}
+    say 'Updating bash config [' . $file . ']';
+
+    if (open my $fh, '>>', $HOME . '/' . $file)
+    {
+        say {$fh} '# User specific aliases and functions';
+        say {$fh} 'if [ -f ~/.files/' . $file . ' ]; then';
+        say {$fh} '     . ~/.files/' . $file;
+        say {$fh} 'fi';
+        close $fh;
+    }
 }
 
 sub setup
 {
-	# Install .files in home folder
-	my $source_folder = $FindBin::RealBin;
-	command('rsync -r ' . $source_folder . '/ ~/.files', 'Syncing files');
+    # Install .files in home folder
+    my $source_folder = $FindBin::RealBin;
+    command('rsync -r ' . $source_folder . '/ ~/.files', 'Syncing files');
 
-	# Create .bash_profile if necesssary
-        my $bash_profile_note = 0;
-	if (-e $HOME . '/.bash_profile' || -l $HOME . '/.bash_profile')
-	{
-            $bash_profile_note = 1;
-	}
-	else
-	{
-		command('cp ~/.files/.bash_profile ~/.bash_profile', 'Copying .bash_profile');
-	}
+    # Create .bash_profile if necesssary
+    my $bash_profile_note = 0;
+    if (-e $HOME . '/.bash_profile' || -l $HOME . '/.bash_profile')
+    {
+        $bash_profile_note = 1;
+    }
+    else
+    {
+        command('cp ~/.files/.bash_profile ~/.bash_profile', 'Copying .bash_profile');
+    }
 
-	# Create bash configs if necessary
-	command('touch ~/.bashrc ~/.profile', 'Touching bash configs');
+    # Create bash configs if necessary
+    command('touch ~/.bashrc ~/.profile', 'Touching bash configs');
 
-	# Update them to source .files/ counterparts if they don't already
-	update_bash_config('.bashrc');
-	update_bash_config('.profile');
-	
-	# Remove .bash_login
-	if (-e $HOME . '/.bash_login' || -l $HOME . '/.bash_login')
-	{
-		command('rm ~/.bash_login', 'Removing .bash_login');
-	}
+    # Update them to source .files/ counterparts if they don't already
+    update_bash_config('.bashrc');
+    update_bash_config('.profile');
 
-	# Symlink program specific config files
-	for my $source_file (@SYMLINK_FILES)
-	{
-		unless (-e $HOME . '/' . $source_file || -l $HOME . '/' . $source_file)
-		{
-			command('ln -s ~/.files/' . $source_file . ' ~/' . $source_file, 'Symlinking ' . $source_file);
-		}
-	}
+    # Remove .bash_login
+    if (-e $HOME . '/.bash_login' || -l $HOME . '/.bash_login')
+    {
+        command('rm ~/.bash_login', 'Removing .bash_login');
+    }
 
-        if ($bash_profile_note)
+    # Symlink program specific config files
+    for my $source_file (@SYMLINK_FILES)
+    {
+        unless (-e $HOME . '/' . $source_file || -l $HOME . '/' . $source_file)
         {
-            say '';
-            say 'Note: ~/.bash_profile already exists. Manually update it to source ~/.profile and ~/.bashrc if necessary.';
+            command('ln -s ~/.files/' . $source_file . ' ~/' . $source_file, 'Symlinking ' . $source_file);
         }
+    }
+
+    if ($bash_profile_note)
+    {
+        say '';
+        say 'Note: ~/.bash_profile already exists. Manually update it to source ~/.profile and ~/.bashrc if necessary.';
+    }
 }
 
 sub clean
 {
-	command('rm -rf ~/.files', 'Removing files');
+    command('rm -rf ~/.files', 'Removing files');
 
-	# Unlink program specific config files
-	for my $source_file (@SYMLINK_FILES)
-	{
-		if (-l $HOME . '/' . $source_file)
-		{
-			command('rm ~/' . $source_file, 'Unlinking ' . $source_file);
-		}
-	}
+    # Unlink program specific config files
+    for my $source_file (@SYMLINK_FILES)
+    {
+        if (-l $HOME . '/' . $source_file)
+        {
+            command('rm ~/' . $source_file, 'Unlinking ' . $source_file);
+        }
+    }
 }
 
 for my $arg (@ARGV)
 {
     if ($arg eq '-clean')
     {
-	    clean();
-	    exit;
+        clean();
+        exit;
     }
 }
 

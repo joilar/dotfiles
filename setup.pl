@@ -67,7 +67,10 @@ sub setup
 {
     # Install .files in home folder
     my $source_folder = $FindBin::RealBin;
-    command('rsync -r ' . $source_folder . '/ ~/.files', 'Syncing files');
+    if ($source_folder ne $HOME . '/.files')
+    {
+        command('rsync -r ' . $source_folder . '/ ~/.files', 'Syncing files');
+    }
 
     # Create .bash_profile if necesssary
     my $bash_profile_note = 0;

@@ -109,6 +109,7 @@ sub setup
     {
         say '';
         say 'Note: ~/.bash_profile already exists. Manually update it to source ~/.profile and ~/.bashrc if necessary.';
+        say '  See ~/.files/.bash_profile for an example.';
     }
 }
 

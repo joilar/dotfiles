@@ -19,3 +19,5 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 
+" Location of color schemes: /usr/share/vim/vim74/colors
+

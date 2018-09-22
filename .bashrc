@@ -25,3 +25,6 @@ alias esh='edit_shell'
 export EDITOR=/usr/bin/vim
 
 
+# Perl local::lib
+eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
+

@@ -14,6 +14,9 @@ alias la='ll -a'
 alias files='cd ~/.files'
 alias repos='cd ~/repos'
 
+alias mred='cd ~/repos/mred'
+alias mrd='cd ~/repos/mrd'
+
 alias edit_shell='vim ~/.files/.bashrc; resource'
 alias esh='edit_shell'
 

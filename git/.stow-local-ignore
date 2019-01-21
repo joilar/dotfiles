@@ -1,0 +1,4 @@
+# Comments and blank lines are allowed.
+# By default, stow ignores .gitignore.
+# In this case, I want stow to copy my .gitignore into my home directory.
+# Adding .stow-local-ignore with no contents will allow stow to manage a .gitignore symlink.

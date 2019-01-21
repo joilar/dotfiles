@@ -4,7 +4,7 @@
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
+    source /etc/bashrc
 fi
 
 # Aliases
@@ -17,6 +17,7 @@ alias ll='ls -lh'
 alias la='ll -a'
 
 alias repos='cd ~/repos'
+alias dotfiles='cd ~/dotfiles'
 
 alias edit_shell='vim -o ~/.profile ~/.bashrc; resource'
 alias esh='edit_shell'
@@ -40,5 +41,9 @@ export EDITOR=/usr/bin/vim
 # Perl local::lib
 if [[ -d "$HOME/perl5/lib/perl5" ]]; then
     eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
+fi
+
+if [[ -f "$HOME/perl5/perlbrew/etc/bashrc" ]]; then
+    source $HOME/perl5/perlbrew/etc/bashrc
 fi
 

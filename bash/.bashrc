@@ -18,6 +18,7 @@ alias la='ll -a'
 
 alias repos='cd ~/repos'
 alias dotfiles='cd ~/dotfiles'
+alias bin='cd ~/bin'
 
 alias edit_shell='vim -o ~/.profile ~/.bashrc; resource'
 alias esh='edit_shell'

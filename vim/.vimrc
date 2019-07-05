@@ -20,4 +20,7 @@ set shiftwidth=4
 set expandtab
 
 " Location of color schemes: /usr/share/vim/vim74/colors
+" Copy and execute this line:
+" ls /usr/share/vim/vim74/colors
+color evening
 

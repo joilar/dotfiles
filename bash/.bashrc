@@ -23,6 +23,9 @@ alias bin='cd ~/bin'
 alias edit_shell='vim -o ~/.profile ~/.bashrc; resource'
 alias esh='edit_shell'
 
+alias edit_vim='vim ~/.vimrc'
+alias evim='edit_vim'
+
 # Functions
 
 function cdwhich ()

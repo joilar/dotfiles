@@ -16,6 +16,9 @@ alias ...='cd ../..'
 alias ll='ls -lh'
 alias la='ll -a'
 
+alias pu='pushd'
+alias po='popd'
+
 alias repos='cd ~/repos'
 alias dotfiles='cd ~/dotfiles'
 alias bin='cd ~/bin'

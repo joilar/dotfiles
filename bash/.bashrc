@@ -29,6 +29,9 @@ alias esh='edit_shell'
 alias edit_vim='vim ~/.vimrc'
 alias evim='edit_vim'
 
+alias edit_git='vim ~/.gitconfig'
+alias egit='edit_git'
+
 # Functions
 
 function cdwhich ()

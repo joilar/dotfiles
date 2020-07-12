@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+
+function yum_cmd () {
+    cmd="/usr/bin/sudo /usr/bin/yum $@"
+    echo "Command: $cmd"
+    $cmd
+    if [[ $? != 0 ]]; then
+        exit $?
+    fi
+}
+
+yum_cmd makecache
+yum_cmd upgrade --cacheonly
+yum_cmd autoremove --cacheonly
+yum_cmd clean all --cacheonly

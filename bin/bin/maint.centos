@@ -9,6 +9,7 @@ function yum_cmd () {
     fi
 }
 
+yum_cmd makecache fast
 yum_cmd upgrade
 yum_cmd autoremove
 yum_cmd clean all

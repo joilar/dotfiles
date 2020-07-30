@@ -9,7 +9,6 @@ function yum_cmd () {
     fi
 }
 
-yum_cmd makecache
-yum_cmd upgrade --cacheonly
-yum_cmd autoremove --cacheonly
-yum_cmd clean all --cacheonly
+yum_cmd upgrade
+yum_cmd autoremove
+yum_cmd clean all

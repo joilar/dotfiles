@@ -7,6 +7,18 @@ if [ -f /etc/bashrc ]; then
     source /etc/bashrc
 fi
 
+# Source distro definitions
+# Some distros include their own bashrc.
+if [ -f ~/.bashrc.distro ]; then
+    source ~/.bashrc.distro
+fi
+
+# Source local definitions
+# Some machines require one-off customizations. Those go here.
+if [ -f ~/.bashrc.local ]; then
+    source ~/.bashrc.local
+fi
+
 # Aliases
 
 alias resource='source ~/.bash_profile'

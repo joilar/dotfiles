@@ -12,7 +12,5 @@ echo "Log: $log_path"
 mkdir -p $log_dir
 
 emerge --verbose --sync |& tee -a $log_path
-emerge --verbose --update --getbinpkgonly --nodeps $bin_atoms |& tee -a $log_path
-emerge --verbose --update --deep --newuse --exclude "$bin_atoms" @world |& tee -a $log_path
-emerge --verbose --depclean |& tee -a $log_path
-emerge --verbose @preserved-rebuild |& tee -a $log_path
+emerge --verbose --update --ask --getbinpkgonly --nodeps $bin_atoms |& tee -a $log_path
+emerge --verbose --update --ask --deep --newuse --exclude "$bin_atoms" @world |& tee -a $log_path

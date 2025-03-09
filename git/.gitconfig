@@ -17,3 +17,5 @@
     default = current
 [color]
     ui = true
+[pull]
+    ff = only

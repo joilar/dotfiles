@@ -44,6 +44,8 @@ alias evim='edit_vim'
 alias edit_git='vim ~/.gitconfig'
 alias egit='edit_git'
 
+alias linode='ssh joilar@linode.johnoilar.com'
+
 # Functions
 
 function cdwhich ()

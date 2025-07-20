@@ -27,14 +27,6 @@ setup: phony setup/dirs setup/perl
 clean: phony clean/perl clean/dirs
 	@echo 'Clean complete.'
 
-key/github: phony
-	export GITHUB_KEY="github.$$(hostname).$$(date +%F)" \
-	    && cd $(HOME)/.ssh \
-	    && ssh-keygen -t ed25519 -f $${GITHUB_KEY} -C "$${GITHUB_KEY}" \
-	    && ln -s -f $${GITHUB_KEY} github.current \
-	    && ln -s -f $${GITHUB_KEY}.pub github.current.pub \
-	    && cat $${GITHUB_KEY}.pub
-
 
 # =======================================
 # Common Directories
@@ -50,6 +42,7 @@ $(LOCAL_BIN):
 
 $(LOCAL_CONFIG):
 	mkdir -p $(LOCAL_CONFIG)
+
 
 # =======================================
 # Perl Dependencies
@@ -67,3 +60,21 @@ $(HOME)/perl5/cpanm.update: $(CPANM) cpanfile
 	$(CPANM) --local-lib $(HOME)/perl5 --installdeps .
 	touch $(HOME)/perl5/cpanm.update
 
+
+# =======================================
+# Key Management
+# ========================================
+
+key/personal: phony
+	export PERSONAL_KEY="personal.$$(hostname).$$(date +%F)" \
+	    && cd $(HOME)/.ssh \
+	    && ssh-keygen -t ed25519 -C "$${PERSONAL_KEY}" \
+	    && cat id_ed25519.pub
+
+key/github: phony
+	export GITHUB_KEY="github.$$(hostname).$$(date +%F)" \
+	    && cd $(HOME)/.ssh \
+	    && ssh-keygen -t ed25519 -f $${GITHUB_KEY} -C "$${GITHUB_KEY}" \
+	    && ln -s -f $${GITHUB_KEY} github.current \
+	    && ln -s -f $${GITHUB_KEY}.pub github.current.pub \
+	    && cat $${GITHUB_KEY}.pub

@@ -62,6 +62,15 @@ $(HOME)/perl5/cpanm.update: $(CPANM) cpanfile
 
 
 # =======================================
+# Individual Tool Installers
+# ========================================
+
+# https://github.com/pyenv/pyenv-installer
+pyenv:
+	curl -fsSL https://pyenv.run | bash
+
+
+# =======================================
 # Key Management
 # ========================================
 

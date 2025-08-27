@@ -71,3 +71,9 @@ if [[ -f "$HOME/perl5/perlbrew/etc/bashrc" ]]; then
     source $HOME/perl5/perlbrew/etc/bashrc
 fi
 
+
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
+

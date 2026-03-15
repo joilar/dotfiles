@@ -2,6 +2,11 @@
 # https://superuser.com/questions/789448/choosing-between-bashrc-profile-bash-profile-etc
 # ~/.profile has the stuff NOT specifically related to bash, such as environment variables (PATH and friends)
 
+# Source host profile if it exists.
+if [ -f /etc/profile ]; then
+    source /etc/profile
+fi
+
 # Source distro profile.
 # Some distros include their own profile.
 if [ -f ~/.profile.distro ]; then

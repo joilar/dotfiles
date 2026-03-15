@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 set -e
 
@@ -11,3 +11,5 @@ mkdir -p $log_dir
 
 emerge --verbose --ask --depclean |& tee -a $log_path
 emerge --verbose --ask @preserved-rebuild |& tee -a $log_path
+eclean --verbose --interactive --deep distfiles |& tee -a $log_path
+eclean --verbose --interactive --deep packages |& tee -a $log_path

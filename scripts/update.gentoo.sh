@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 set -e
 
@@ -11,6 +11,7 @@ bin_atoms="sys-devel/gcc net-libs/nodejs"
 echo "Log: $log_path"
 mkdir -p $log_dir
 
-emerge --verbose --sync |& tee -a $log_path
+emerge --verbose --ask --sync |& tee -a $log_path
+emerge --verbose --ask --oneshot sys-apps/portage |& tee -a $log_path
 emerge --verbose --update --ask --getbinpkgonly --nodeps $bin_atoms |& tee -a $log_path
 emerge --verbose --update --ask --deep --newuse --exclude "$bin_atoms" @world |& tee -a $log_path

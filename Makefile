@@ -13,6 +13,7 @@ CPANM = $(HOME)/perl5/bin/cpanm
 
 LOCAL_BIN    = $(HOME)/.local/bin
 LOCAL_CONFIG = $(HOME)/.local/config
+USER_CLAUDE  = $(HOME)/.claude
 
 # =======================================
 # Targets
@@ -32,16 +33,19 @@ clean: phony clean/perl clean/dirs
 # Common Directories
 # ========================================
 
-setup/dirs: $(LOCAL_BIN) $(LOCAL_CONFIG)
+setup/dirs: $(LOCAL_BIN) $(LOCAL_CONFIG) $(USER_CLAUDE)
 
 clean/dirs:
-	rmdir $(LOCAL_BIN) $(LOCAL_CONFIG)
+	rmdir $(LOCAL_BIN) $(LOCAL_CONFIG) $(USER_CLAUDE)
 
 $(LOCAL_BIN):
 	mkdir -p $(LOCAL_BIN)
 
 $(LOCAL_CONFIG):
 	mkdir -p $(LOCAL_CONFIG)
+
+$(USER_CLAUDE):
+	mkdir -p $(USER_CLAUDE)
 
 
 # =======================================

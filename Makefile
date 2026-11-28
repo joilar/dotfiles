@@ -28,6 +28,10 @@ setup: phony setup/dirs setup/perl
 clean: phony clean/perl clean/dirs
 	@echo 'Clean complete.'
 
+# Bootstrap the environment on a remote host.
+bootstrap/%:
+	scp -r ~/dotfiles joilar@$(*):~/dotfiles
+
 
 # =======================================
 # Common Directories
